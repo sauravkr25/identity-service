@@ -1,0 +1,15 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: Identity Service
+  profiles:
+    active: local
+
+
+roles:
+  user: ROLE_USER
+  admin: ROLE_ADMIN
+  driver: ROLE_DRIVER
+

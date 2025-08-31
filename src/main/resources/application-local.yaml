@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/identity_service_db
+    username: identity_service
+    password: "0000"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.default_schema: public
+
+jwt:
+  secret:
+    key: dUM3SDl1VThkWWZKOXNQNW1EMGFMNm5LMnFYMXRSOXlXM3pFOHZNNHBRN3JCMWRGNWhKNnNMOG9UMnZDMHlOMw==
+  expiry:
+    time: 3600000 # in milliseconds
