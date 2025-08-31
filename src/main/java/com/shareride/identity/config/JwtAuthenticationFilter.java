@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.shareride.identity.utils.Constants.*;
+import static com.shareride.identity.utils.Constants.Security.ACTUATOR_REGEX;
 import static com.shareride.identity.utils.Constants.Security.API_V1_AUTH_REGEX;
 
 @Component
@@ -28,9 +29,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final UserDetailsServiceImpl userDetailsService;
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
-
     private static final List<String> EXCLUDE_PATHS = List.of(
-            API_V1_AUTH_REGEX
+            API_V1_AUTH_REGEX,
+            ACTUATOR_REGEX
     );
 
     public JwtAuthenticationFilter(JwtService jwtService, UserDetailsServiceImpl userDetailsService) {

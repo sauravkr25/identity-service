@@ -9,10 +9,11 @@ public enum ErrorCodes {
     // --- Client Errors (4xx) ---
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "ERR_400", "Invalid request"),
     VALIDATION_FAILED(HttpStatus.BAD_REQUEST, "ERR_400_VALIDATION", "Validation failed"),
+    INVALID_INPUT(HttpStatus.BAD_REQUEST, "ERR_400_INVALID_INPUT", "One or more fields are invalid"),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "ERR_401", "Unauthorized"),
     FORBIDDEN(HttpStatus.FORBIDDEN, "ERR_403", "Forbidden"),
     NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_404", "Resource not found"),
-    CONFLICT(HttpStatus.CONFLICT, "ERR_409", "Conflict detected"),
+    CONFLICT(HttpStatus.CONFLICT, "ERR_409", "Duplicate or conflicting data"),
 
     ACCESS_DENIED_INSUFFICIENT_ROLE(HttpStatus.FORBIDDEN, "ERR_403_ROLE", "Access denied: insufficient role/permissions"),
     JWT_AUTHENTICATION_FAILED(HttpStatus.UNAUTHORIZED, "ERR_401_JWT", "Invalid or expired JWT token"),

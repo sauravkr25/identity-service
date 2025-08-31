@@ -1,14 +1,18 @@
 package com.shareride.identity.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.shareride.identity.utils.Constants.CAUSE;
 
@@ -51,7 +55,7 @@ public class GlobalExceptionHandler {
                 .error(status.getReasonPhrase())
                 .code(errorCode.getCode())
                 .message(errorCode.getMessage())
-                .innerError(Map.of(CAUSE, ex.getMessage()))
+                .details(Map.of(CAUSE, ex.getMessage()))
                 .path(request.getRequestURI())
                 .build();
 
@@ -71,12 +75,64 @@ public class GlobalExceptionHandler {
                 .error(status.getReasonPhrase())
                 .code(errorCode.getCode())
                 .message(errorCode.getMessage())
-                .innerError(Map.of(CAUSE, ex.getMessage()))
+                .details(Map.of(CAUSE, ex.getMessage()))
                 .path(request.getRequestURI())
                 .build();
 
         return ResponseEntity.status(status).body(response);
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiErrorResponse> handleValidationException(
+            MethodArgumentNotValidException ex,
+            HttpServletRequest request
+    ) {
+        var errorCode = ErrorCodes.INVALID_INPUT;
+        var status = errorCode.getHttpStatus();
+
+        // Collect field-specific error messages
+        Map<String, String> fieldErrors = ex.getBindingResult().getFieldErrors()
+                .stream()
+                .collect(Collectors.toMap(
+                        FieldError::getField,
+                        FieldError::getDefaultMessage,
+                        (existing, replacement) -> existing // if duplicate keys, keep first
+                ));
+
+        ApiErrorResponse response = ApiErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .code(errorCode.getCode())
+                .message(errorCode.getMessage())
+                .details(Map.of(CAUSE, fieldErrors))
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.status(status).body(response);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiErrorResponse> handleDataIntegrityViolation(
+            DataIntegrityViolationException ex,
+            HttpServletRequest request
+    ) {
+        var errorCode = ErrorCodes.CONFLICT;
+        var status = errorCode.getHttpStatus();
+
+        ApiErrorResponse response = ApiErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .code(errorCode.getCode())
+                .message(errorCode.getMessage())
+                .details(Map.of(CAUSE, ex.getMostSpecificCause().getMessage()))
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.status(status).body(response);
+    }
+
 
 
     // fallback handler (for unexpected errors)
@@ -95,7 +151,7 @@ public class GlobalExceptionHandler {
                 .error(status.getReasonPhrase())
                 .code(errorCode.getCode())
                 .message(errorCode.getMessage())
-                .innerError(Map.of(CAUSE, ex.getMessage()))
+                .details(Map.of(CAUSE, ex.getMessage()))
                 .path(request.getRequestURI())
                 .build();
 

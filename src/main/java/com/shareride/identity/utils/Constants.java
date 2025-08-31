@@ -7,6 +7,7 @@ public class Constants {
     public static final String SUCCESS = "success";
     public static final String FAILURE = "failure";
     public static final String CAUSE = "cause";
+    public static final String FIELDS = "fields";
     public static final String ROLES = "roles";
     public static final String TOKEN = "token";
     public static final String JWT_EXCEPTION = "JWTException";

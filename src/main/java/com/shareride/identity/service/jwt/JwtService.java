@@ -1,10 +1,11 @@
 package com.shareride.identity.service.jwt;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,8 +25,6 @@ import static com.shareride.identity.utils.Constants.ROLES;
 
 @Service
 public class JwtService {
-
-    private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
     private final String jwtSecret;
     private final int jwtExpirationTimeMs;

@@ -53,23 +53,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter,
                                                    JwtAuthExceptionHandler jwtAuthExceptionHandler) throws Exception {
         http
-            // Disable CSRF protection as we are using JWTs for a stateless API
             .csrf(csrf -> csrf.disable())
-
-            // Configure authorization rules for different endpoints
             .authorizeHttpRequests(auth -> auth
-                    // Allow all requests to the /api/v1/auth/** endpoints (e.g., login, register)
                     .requestMatchers(API_V1_AUTH_REGEX, ACTUATOR_REGEX).permitAll()
-                    // Require authentication for any other request
                     .anyRequest().authenticated()
             )
             .exceptionHandling(ex -> ex
                     .authenticationEntryPoint(jwtAuthExceptionHandler)
             )
-
-            // Configure session management to be stateless
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            // add our custom JWT filter here
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
