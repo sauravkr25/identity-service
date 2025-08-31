@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.shareride.identity.utils.Constants.Security.ACTUATOR_REGEX;
 import static com.shareride.identity.utils.Constants.Security.API_V1_AUTH_REGEX;
 
 @Configuration
@@ -58,7 +59,7 @@ public class SecurityConfig {
             // Configure authorization rules for different endpoints
             .authorizeHttpRequests(auth -> auth
                     // Allow all requests to the /api/v1/auth/** endpoints (e.g., login, register)
-                    .requestMatchers(API_V1_AUTH_REGEX).permitAll()
+                    .requestMatchers(API_V1_AUTH_REGEX, ACTUATOR_REGEX).permitAll()
                     // Require authentication for any other request
                     .anyRequest().authenticated()
             )

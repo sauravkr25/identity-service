@@ -36,6 +36,7 @@ public class Constants {
         public static final String API_V1_AUTH_REGEX = API_V1 + "/auth/**";
         public static final String API_V1_USERS_REGEX = API_V1 + "/users/**";
         public static final String API_V1_ADMIN_REGEX = API_V1 + "/admin/**";
+        public static final String ACTUATOR_REGEX = "/actuator/**";
     }
 
 }
