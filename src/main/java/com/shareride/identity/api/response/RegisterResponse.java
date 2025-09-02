@@ -16,7 +16,7 @@ public class RegisterResponse {
     String email;
     String phone;
     UserStatus status;
-    Boolean isCorporateVerified;
+    boolean isCorporateVerified;
 
     public static RegisterResponse from(UserDomain userDomain){
         return RegisterResponse.builder()

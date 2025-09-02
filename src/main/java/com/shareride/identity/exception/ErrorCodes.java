@@ -13,8 +13,11 @@ public enum ErrorCodes {
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "ERR_401", "Unauthorized"),
     FORBIDDEN(HttpStatus.FORBIDDEN, "ERR_403", "Forbidden"),
     NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_404", "Resource not found"),
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_404_USER", "User not found"),
+    ROLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_404_ROLE", "Role not found"),
     CONFLICT(HttpStatus.CONFLICT, "ERR_409", "Duplicate or conflicting data"),
 
+    INVALID_VERIFICATION_TOKEN(HttpStatus.BAD_REQUEST, "ERR_400_TOKEN", "Invalid or expired verification token"),
     ACCESS_DENIED_INSUFFICIENT_ROLE(HttpStatus.FORBIDDEN, "ERR_403_ROLE", "Access denied: insufficient role/permissions"),
     JWT_AUTHENTICATION_FAILED(HttpStatus.UNAUTHORIZED, "ERR_401_JWT", "Invalid or expired JWT token"),
 

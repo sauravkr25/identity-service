@@ -41,7 +41,7 @@ public class JwtAuthExceptionHandler implements AuthenticationEntryPoint {
                 .error(status.getReasonPhrase())
                 .code(errorCode.getCode())
                 .message(errorCode.getMessage())
-                .innerError(Map.of(CAUSE, authException.getMessage(), JWT_EXCEPTION, jwtEx != null ? jwtEx.getMessage() : "null"))
+                .details(Map.of(CAUSE, authException.getMessage(),JWT_EXCEPTION, jwtEx != null ? jwtEx.getMessage() : "null"))
                 .path(request.getRequestURI())
                 .build();
 

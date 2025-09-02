@@ -16,6 +16,5 @@ public class ApiErrorResponse {
     private String code;
     private String message;
     private final Map<String, Object> details;
-    private final Map<String, Object> innerError;
     private final String path;
 }

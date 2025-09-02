@@ -34,7 +34,6 @@ public class GlobalExceptionHandler {
                 .code(errorCode.getCode())
                 .message(errorCode.getMessage())
                 .details(ex.getDetails())
-                .innerError(Map.of(CAUSE, ex.getMessage()))
                 .path(request.getRequestURI())
                 .build();
 

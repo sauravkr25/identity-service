@@ -11,4 +11,5 @@ public class RoleProperties {
 
     private String user;
     private String admin;
+    private String driver;
 }

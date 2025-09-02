@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.shareride.identity.utils.Constants.PropertyKeys.JWT_EXPIRATION;
+import static com.shareride.identity.utils.Constants.PropertyKeys.JWT_EXPIRATION_IN_MILLIS;
 import static com.shareride.identity.utils.Constants.PropertyKeys.JWT_SECRET_KEY;
 import static com.shareride.identity.utils.Constants.ROLES;
 
@@ -29,7 +29,7 @@ public class JwtService {
     private final String jwtSecret;
     private final int jwtExpirationTimeMs;
 
-    public JwtService(@Value(JWT_SECRET_KEY) String jwtSecret, @Value(JWT_EXPIRATION) int jwtExpirationTimeMs) {
+    public JwtService(@Value(JWT_SECRET_KEY) String jwtSecret, @Value(JWT_EXPIRATION_IN_MILLIS) int jwtExpirationTimeMs) {
         this.jwtSecret = jwtSecret;
         this.jwtExpirationTimeMs = jwtExpirationTimeMs;
     }

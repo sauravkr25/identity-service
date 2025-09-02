@@ -45,9 +45,4 @@ public class UserController {
         return ResponseEntity.ok(UserResponse.from(userDomain));
     }
 
-    @GetMapping(SEND_VERIFICATION_EMAIL)
-    public ResponseEntity<Void> sendTestEmail() {
-//        userService.sendTestEmail();
-        return ResponseEntity.ok().build();
-    }
 }

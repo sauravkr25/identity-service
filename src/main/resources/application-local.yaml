@@ -1,17 +1,64 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/identity_service_db
-    username: identity_service
-    password: "0000"
+    url:
+    username:
+    password:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: validate
     properties:
       hibernate.default_schema: public
+  mail:
+    host:
+    port:
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 jwt:
   secret:
-    key: dUM3SDl1VThkWWZKOXNQNW1EMGFMNm5LMnFYMXRSOXlXM3pFOHZNNHBRN3JCMWRGNWhKNnNMOG9UMnZDMHlOMw==
+    key:
   expiry:
-    time: 3600000 # in milliseconds
+    timeMillis: 3600000 # in milliseconds
+
+
+app:
+  base-url: http://localhost:9090
+  support-email: support@shareride.com
+  verification-token:
+    bytes: 32
+    expiry-in-millis: 60000
+  email:
+    public-domains:
+      - email.com
+      - gmail.com
+      - yahoo.com
+      - hotmail.com
+      - outlook.com
+      - live.com
+      - msn.com
+      - icloud.com
+      - aol.com
+      - protonmail.com
+      - zoho.com
+      - gmx.com
+      - yandex.com
+      - rediffmail.com
+      - naver.com
+      - hanmail.net
+      - daum.net
+      - 163.com
+      - 126.com
+      - qq.com
+      - sina.com
+      - web.de
+      - t-online.de
+      - freenet.de
+      - laposte.net
+      - libero.it

@@ -15,11 +15,13 @@ public class Constants {
     public static final String BEARER = "Bearer";
 
     public static final class PropertyKeys {
+        public static final String APP_BASE_URL = "${app.base.url}";
         public static final String ROLE_USER = "${roles.user}";
         public static final String ROLE_ADMIN = "${roles.admin}";
         public static final String ROLE_DRIVER = "${roles.driver}";
         public static final String JWT_SECRET_KEY = "${jwt.secret.key}";
-        public static final String JWT_EXPIRATION = "${jwt.expiry.time}";
+        public static final String JWT_EXPIRATION_IN_MILLIS = "${jwt.expiry.timeMillis}";
+        public static final String TOKEN_EXPIRATION_MINUTES = "${token.verification.expiry.minutes}";
     }
 
     public static final class Routes {
