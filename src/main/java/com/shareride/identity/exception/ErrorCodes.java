@@ -17,6 +17,8 @@ public enum ErrorCodes {
     ROLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_404_ROLE", "Role not found"),
     CONFLICT(HttpStatus.CONFLICT, "ERR_409", "Duplicate or conflicting data"),
 
+    RATE_LIMIT_EXCEEDED(HttpStatus.TOO_MANY_REQUESTS, "ERR_429_RATE_LIMIT", "Rate limit exceeded. Please try again later."),
+
     INVALID_VERIFICATION_TOKEN(HttpStatus.BAD_REQUEST, "ERR_400_TOKEN", "Invalid or expired verification token"),
     ACCESS_DENIED_INSUFFICIENT_ROLE(HttpStatus.FORBIDDEN, "ERR_403_ROLE", "Access denied: insufficient role/permissions"),
     JWT_AUTHENTICATION_FAILED(HttpStatus.UNAUTHORIZED, "ERR_401_JWT", "Invalid or expired JWT token"),

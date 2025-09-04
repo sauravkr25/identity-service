@@ -13,6 +13,9 @@ public class Constants {
     public static final String JWT_EXCEPTION = "JWTException";
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer";
+    public static final String EMAIL_PREFIX = "email-";
+    public static final String IP_PREFIX = "ip-";
+    public static final String HEADER_RATE_LIMIT_REMAINING = "X-Rate-Limit-Remaining";
 
     public static final class PropertyKeys {
         public static final String APP_BASE_URL = "${app.base.url}";

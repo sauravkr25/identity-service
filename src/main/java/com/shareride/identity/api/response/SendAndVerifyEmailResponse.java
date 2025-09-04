@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SendEmailResponse {
+public class SendAndVerifyEmailResponse {
 
     private String status;
     private String message;
 }
+

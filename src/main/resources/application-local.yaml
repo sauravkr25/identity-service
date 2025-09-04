@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url:
-    username:
-    password:
+    url: jdbc:postgresql://localhost:5432/identity_service_db
+    username: identity_service
+    password: "0000"
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -10,10 +10,10 @@ spring:
     properties:
       hibernate.default_schema: public
   mail:
-    host:
-    port:
-    username:
-    password:
+    host: sandbox.smtp.mailtrap.io
+    port: 587
+    username: e8c5371f12e77e
+    password: 96ca3d20bb6fa9
     properties:
       mail:
         smtp:
@@ -23,7 +23,7 @@ spring:
 
 jwt:
   secret:
-    key:
+    key: dUM3SDl1VThkWWZKOXNQNW1EMGFMNm5LMnFYMXRSOXlXM3pFOHZNNHBRN3JCMWRGNWhKNnNMOG9UMnZDMHlOMw==
   expiry:
     timeMillis: 3600000 # in milliseconds
 
@@ -34,6 +34,15 @@ app:
   verification-token:
     bytes: 32
     expiry-in-millis: 60000
+  rate-limiter:
+    email:
+      capacity: 5
+      refill-tokens: 5
+      refill-seconds: 60
+    ip:
+      capacity: 10
+      refill-tokens: 10
+      refill-seconds: 60
   email:
     public-domains:
       - email.com
