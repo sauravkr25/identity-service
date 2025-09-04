@@ -151,3 +151,42 @@ Checks if the service is running.
   "status": "UP"
 }
 ```
+
+---
+## Error Handling
+All error responses follow this structure:
+
+```json
+{
+  "timestamp": "2025-09-04T20:18:28.7083393",
+  "status": 400,
+  "error": "Bad Request",
+  "code": "ERR_400",
+  "message": "Invalid request",
+  "details": {
+    "cause": "Email is already in use"
+  },
+  "path": "/api/v1/auth/register"
+}
+```
+```json
+{
+    "timestamp": "2025-09-04T20:09:20.0867354",
+    "status": 401,
+    "error": "Unauthorized",
+    "code": "ERR_401_JWT",
+    "message": "Invalid or expired JWT token",
+    "details": {
+        "JWTException": "JWT strings must contain exactly 2 period characters. Found: 0",
+        "cause": "Full authentication is required to access this resource"
+    },
+    "path": "/api/v1/users/me"
+}
+```
+- `timestamp`: Time of the error
+- `status`: HTTP status code
+- `error`: Error type
+- `code`: Application-specific error code
+- `message`:  Human-readable error message
+- `details`: Cause and additional error details (optional)
+- `path`: Request path that caused the error
