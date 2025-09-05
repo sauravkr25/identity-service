@@ -3,7 +3,6 @@ package com.shareride.identity.ratelimiter;
 import com.shareride.identity.config.properties.AppProperties;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
-import io.github.bucket4j.ConsumptionProbe;
 import io.github.bucket4j.Refill;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +23,9 @@ public class RateLimiterService {
         this.appProperties = appProperties;
     }
 
-    public ConsumptionProbe probeEmailRateLimit(String email) {
+    public Bucket resolveBucketForEmail(String email) {
         String key = EMAIL_PREFIX + email;
-        Bucket tokenBucket = bucketCache.computeIfAbsent(key, k -> newEmailBucket());
-        return tokenBucket.tryConsumeAndReturnRemaining(1);
+        return bucketCache.computeIfAbsent(key, k -> newEmailBucket());
     }
 
     private Bucket newEmailBucket() {

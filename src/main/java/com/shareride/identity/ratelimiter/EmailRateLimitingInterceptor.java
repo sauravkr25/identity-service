@@ -1,5 +1,7 @@
 package com.shareride.identity.ratelimiter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shareride.identity.api.request.EmailRequest;
 import com.shareride.identity.exception.ApplicationException;
 import com.shareride.identity.exception.ErrorCodes;
 import io.github.bucket4j.Bucket;
@@ -16,22 +18,26 @@ import static com.shareride.identity.utils.Constants.HEADER_RATE_LIMIT_REMAINING
 import static com.shareride.identity.utils.Constants.RETRY_AFTER_SECONDS;
 
 @Component
-public class IpRateLimiterInterceptor implements HandlerInterceptor {
+public class EmailRateLimitingInterceptor implements HandlerInterceptor {
 
-    private  final RateLimiterService rateLimiterService;
+    private final RateLimiterService rateLimiterService;
+    private final ObjectMapper objectMapper;
 
-    public IpRateLimiterInterceptor(RateLimiterService rateLimiterService) {
+    public EmailRateLimitingInterceptor(RateLimiterService rateLimiterService, ObjectMapper objectMapper) {
         this.rateLimiterService = rateLimiterService;
+        this.objectMapper = objectMapper;
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String ipAddresss = request.getRemoteAddr();
-        if (ipAddresss == null || ipAddresss.isBlank()) {
-            throw ApplicationException.of(ErrorCodes.FORBIDDEN, Map.of(CAUSE, "Could not identify client IP address"));
+        EmailRequest emailRequest = objectMapper.readValue(request.getInputStream(), EmailRequest.class);
+        String email = emailRequest.getEmail();
+
+        if (email == null || email.isBlank()) {
+            throw ApplicationException.of(ErrorCodes.BAD_REQUEST, Map.of(CAUSE, "Could not read email from request"));
         }
 
-        Bucket tokenBucket = rateLimiterService.resolveBucketForIp(ipAddresss);
+        Bucket tokenBucket = rateLimiterService.resolveBucketForEmail(email);
         ConsumptionProbe probe = tokenBucket.tryConsumeAndReturnRemaining(1);
 
         if (probe.isConsumed()) {
@@ -46,5 +52,4 @@ public class IpRateLimiterInterceptor implements HandlerInterceptor {
             );
         }
     }
-
 }

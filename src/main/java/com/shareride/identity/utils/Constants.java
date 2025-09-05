@@ -10,12 +10,18 @@ public class Constants {
     public static final String FIELDS = "fields";
     public static final String ROLES = "roles";
     public static final String TOKEN = "token";
+    public static final String POST = "POST";
+    public static final String GET = "GET";
+    public static final String PUT = "PUT";
+    public static final String DELETE = "DELETE";
+    public static final String PATCH = "PATCH";
     public static final String JWT_EXCEPTION = "JWTException";
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer";
     public static final String EMAIL_PREFIX = "email-";
     public static final String IP_PREFIX = "ip-";
     public static final String HEADER_RATE_LIMIT_REMAINING = "X-Rate-Limit-Remaining";
+    public static final String RETRY_AFTER_SECONDS = "RetryAfterSeconds";
 
     public static final class PropertyKeys {
         public static final String APP_BASE_URL = "${app.base.url}";
