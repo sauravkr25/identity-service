@@ -23,5 +23,5 @@ public class RegisterRequest {
     private String password;
 
     @Pattern(regexp = "^\\d{10}$", message = "Phone number must be 10 digits")
-    private String phone;
+    private String phoneNumber;
 }

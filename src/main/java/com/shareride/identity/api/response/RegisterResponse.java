@@ -14,7 +14,7 @@ public class RegisterResponse {
     UUID userId;
     String fullName;
     String email;
-    String phone;
+    String phoneNumber;
     UserStatus status;
     boolean isCorporateVerified;
 
@@ -23,7 +23,7 @@ public class RegisterResponse {
                 .userId(userDomain.getUserId())
                 .fullName(userDomain.getFullName())
                 .email(userDomain.getEmail())
-                .phone(userDomain.getPhone())
+                .phoneNumber(userDomain.getPhone())
                 .status(userDomain.getStatus())
                 .isCorporateVerified(userDomain.isCorporateVerified())
                 .build();

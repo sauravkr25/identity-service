@@ -11,7 +11,7 @@ public class UserResponse {
     private String userId;
     private String fullName;
     private String email;
-    private String phone;
+    private String phoneNumber;
     private String status;
     private boolean isCorporateVerified;
 
@@ -20,7 +20,7 @@ public class UserResponse {
                 .userId(userDomain.getUserId().toString())
                 .fullName(userDomain.getFullName())
                 .email(userDomain.getEmail())
-                .phone(userDomain.getPhone())
+                .phoneNumber(userDomain.getPhone())
                 .status(userDomain.getStatus().name())
                 .isCorporateVerified(userDomain.isCorporateVerified())
                 .build();

@@ -12,7 +12,8 @@ Registers a new user.
 {
   "fullName": "Sammed Jain",
   "email": "sammed@samsung.com",
-  "password": "password"
+  "password": "password",
+  "phoneNumber": "9090909090"
 }
 ```
 
@@ -25,7 +26,7 @@ Registers a new user.
     "userId": "0be3f348-db3f-4713-9e00-2c0975c654c3",
     "fullName": "Sammed Jain",
     "email": "sammed@msung.com",
-    "phone": "9090909090",
+    "phoneNumber": "9090909090",
     "status": "PENDING_VERIFICATION",
     "corporateVerified": false
 }
@@ -129,7 +130,7 @@ Authorization: Bearer <jwt-token>
   "userId": "d989f6ff-fb14-485b-96ea-a28a34e469b2",
   "fullName": "Sammed Jain",
   "email": "sammed@email.com",
-  "phone": "9090909090",
+  "phoneNumber": "9090909090",
   "status": "ACTIVE",
   "corporateVerified": true
 }

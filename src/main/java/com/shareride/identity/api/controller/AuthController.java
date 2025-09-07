@@ -37,7 +37,7 @@ public class AuthController {
                 .fullName(request.getFullName())
                 .email(request.getEmail())
                 .password(request.getPassword())
-                .phone(request.getPhone())
+                .phone(request.getPhoneNumber())
                 .build();
 
         userDomain = authService.register(userDomain);
