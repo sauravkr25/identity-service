@@ -1,4 +1,4 @@
-package com.shareride.identity.config;
+package com.shareride.identity.config.requestwrapper;
 
 import jakarta.servlet.ReadListener;
 import jakarta.servlet.ServletInputStream;

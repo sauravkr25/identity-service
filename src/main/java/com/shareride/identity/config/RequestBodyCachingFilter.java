@@ -1,5 +1,6 @@
 package com.shareride.identity.config;
 
+import com.shareride.identity.config.requestwrapper.CachedBodyHttpServletRequestWrapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
