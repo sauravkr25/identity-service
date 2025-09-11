@@ -28,9 +28,9 @@ import static com.shareride.identity.utils.Constants.ROLES;
 public class JwtService {
 
     private final String jwtSecret;
-    private final int jwtExpirationTimeMs;
+    private final long jwtExpirationTimeMs;
 
-    public JwtService(@Value(JWT_SECRET_KEY) String jwtSecret, @Value(JWT_EXPIRATION_IN_MILLIS) int jwtExpirationTimeMs) {
+    public JwtService(@Value(JWT_SECRET_KEY) String jwtSecret, @Value(JWT_EXPIRATION_IN_MILLIS) long jwtExpirationTimeMs) {
         this.jwtSecret = jwtSecret;
         this.jwtExpirationTimeMs = jwtExpirationTimeMs;
     }
@@ -70,7 +70,7 @@ public class JwtService {
                     .parseClaimsJws(token); // Will throw exception if invalid
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            return false;
+            throw e;
         }
     }
 

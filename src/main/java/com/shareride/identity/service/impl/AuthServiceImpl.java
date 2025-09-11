@@ -110,7 +110,7 @@ public class AuthServiceImpl implements AuthService {
         }
         User user = userOptional.get();
         String token = RandomUtil.generateRandomBase64String(appProperties.getVerificationToken().getBytes());
-        int expirationInMs = appProperties.getVerificationToken().getExpiryInMillis();
+        long expirationInMs = appProperties.getVerificationToken().getExpiryInMillis();
 
         tokenRepository.save(createVerificationTokenObject(user, token, expirationInMs));
         EmailMessage emailMessage = createVerificationEmail(user, token, expirationInMs, appProperties.getBaseUrl());
@@ -138,7 +138,7 @@ public class AuthServiceImpl implements AuthService {
         return true;
     }
 
-    private VerificationToken createVerificationTokenObject(User user, String token, int expirationInMs) {
+    private VerificationToken createVerificationTokenObject(User user, String token, long expirationInMs) {
         Optional<VerificationToken> existingToken = tokenRepository.findByUser(user);
 
         VerificationToken newToken = VerificationToken.builder()
@@ -151,7 +151,7 @@ public class AuthServiceImpl implements AuthService {
         return newToken;
     }
 
-    private EmailMessage createVerificationEmail(User user, String token, int expirationInMs, String baseUrl) {
+    private EmailMessage createVerificationEmail(User user, String token, long expirationInMs, String baseUrl) {
         String verificationLink = baseUrl + API_V1 + AUTH + VERIFY_EMAIL + "?token=" + token;
 
         String subject = "Verify your email - ShareRide";

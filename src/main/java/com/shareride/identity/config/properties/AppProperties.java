@@ -20,7 +20,7 @@ public class AppProperties {
 
     @Data
     public static class VerificationToken {
-        private int expiryInMillis;
+        private long expiryInMillis;
         private int bytes;
     }
 
