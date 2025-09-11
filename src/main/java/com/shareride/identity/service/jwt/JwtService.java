@@ -9,6 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -80,6 +81,14 @@ public class JwtService {
 
     public String extractUsername(String token) {
        return parseClaims(token).getSubject();
+    }
+
+    public List<GrantedAuthority> extractAuthorities(String token) {
+        Claims claims = parseClaims(token);
+        List<String> roles = claims.get(ROLES, List.class);
+        return roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     private Boolean isTokenExpired(String token) {
