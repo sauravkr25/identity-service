@@ -50,18 +50,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             String authHeader = request.getHeader(AUTHORIZATION);
             String token = null;
-            String username = null;
+            String userId = null;
 
             if (authHeader != null && authHeader.startsWith(BEARER_)) {
                 token = authHeader.substring(7);
                 if (jwtService.validateToken(token)) {
-                    username = jwtService.extractUsername(token);
+                    userId = jwtService.extractUserId(token);
                 }
             }
 
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 List<GrantedAuthority> authorities = jwtService.extractAuthorities(token);
-                UserDetails userDetails = new User(username, EMPTY, authorities);
+                UserDetails userDetails = new User(userId, EMPTY, authorities);
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails,

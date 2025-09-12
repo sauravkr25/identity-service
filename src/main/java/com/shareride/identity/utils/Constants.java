@@ -9,6 +9,7 @@ public class Constants {
     public static final String CAUSE = "cause";
     public static final String FIELDS = "fields";
     public static final String ROLES = "roles";
+    public static  final String EMAIL = "email";
     public static final String TOKEN = "token";
     public static final String POST = "POST";
     public static final String GET = "GET";

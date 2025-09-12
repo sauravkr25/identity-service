@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 import static com.shareride.identity.utils.Constants.Routes.*;
 
 @RestController
@@ -34,10 +36,10 @@ public class UserController {
         // Spring injects the 'Authentication' object from the security context.
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String userEmail = userDetails.getUsername();
+        String userId = userDetails.getUsername();
 
         UserDomain userDomain = UserDomain.builder()
-                .email(userEmail)
+                .userId(UUID.fromString(userId))
                 .build();
 
         userDomain = userService.getMyProfile(userDomain);

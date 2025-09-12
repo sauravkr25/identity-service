@@ -1,5 +1,6 @@
 package com.shareride.identity.service.jwt;
 
+import com.shareride.identity.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -18,8 +19,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.shareride.identity.utils.Constants.EMAIL;
 import static com.shareride.identity.utils.Constants.PropertyKeys.JWT_EXPIRATION_IN_MILLIS;
 import static com.shareride.identity.utils.Constants.PropertyKeys.JWT_SECRET_KEY;
 import static com.shareride.identity.utils.Constants.ROLES;
@@ -41,7 +44,9 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        String username = userDetails.getUsername();
+        User user = (User) userDetails;
+        UUID userId = user.getId();
+        String email = user.getEmail();
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationTimeMs);
 
@@ -52,10 +57,11 @@ public class JwtService {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
         claims.put(ROLES, roles);
+        claims.put(EMAIL, email);
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(username)
+                .setSubject(userId.toString())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
@@ -74,12 +80,7 @@ public class JwtService {
         }
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }
-
-    public String extractUsername(String token) {
+    public String extractUserId(String token) {
        return parseClaims(token).getSubject();
     }
 

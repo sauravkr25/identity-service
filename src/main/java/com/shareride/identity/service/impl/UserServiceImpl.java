@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDomain getMyProfile(UserDomain userDomain) {
 
-        userRepository.findByEmail(userDomain.getEmail())
+        userRepository.findById(userDomain.getUserId())
                 .ifPresent(userDomain::updateFrom);
 
         return userDomain;
