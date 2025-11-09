@@ -1,4 +1,4 @@
--- 5. Create the Verification Tokens table
+-- Create the Verification Tokens table
 -- This table stores tokens for verifying user email addresses.
 CREATE TABLE verification_tokens (
                                      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

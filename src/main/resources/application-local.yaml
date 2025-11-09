@@ -22,11 +22,12 @@ spring:
             enable: true
 
 jwt:
-  secret:
-    key: dUM3SDl1VThkWWZKOXNQNW1EMGFMNm5LMnFYMXRSOXlXM3pFOHZNNHBRN3JCMWRGNWhKNnNMOG9UMnZDMHlOMw==
-  expiry:
-    timeMillis: 3600000 # in milliseconds
-
+  user-token:
+    secret-key: dUM3SDl1VThkWWZKOXNQNW1EMGFMNm5LMnFYMXRSOXlXM3pFOHZNNHBRN3JCMWRGNWhKNnNMOG9UMnZDMHlOMw==
+    expiration-in-millis: 3600000
+  service-token:
+    secret-key: dUM3SDl1VThkWWZKOXNQNW1EMGFMNm5LMnFYMXRSOXlXM3pFOHZNNHBRN3JCMWRGNWhKNnNMOG9UMnZDMHlOMw==
+    expiration-in-millis: 3600000
 
 app:
   base-url: http://localhost:9090

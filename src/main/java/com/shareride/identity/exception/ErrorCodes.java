@@ -22,6 +22,8 @@ public enum ErrorCodes {
     INVALID_VERIFICATION_TOKEN(HttpStatus.BAD_REQUEST, "ERR_400_TOKEN", "Invalid or expired verification token"),
     ACCESS_DENIED_INSUFFICIENT_ROLE(HttpStatus.FORBIDDEN, "ERR_403_ROLE", "Access denied: insufficient role/permissions"),
     JWT_AUTHENTICATION_FAILED(HttpStatus.UNAUTHORIZED, "ERR_401_JWT", "Invalid or expired JWT token"),
+    INVALID_CLIENT_CREDENTIALS(HttpStatus.UNAUTHORIZED, "ERR_401_CLIENT_AUTH", "Invalid client ID or secret."),
+    CLIENT_INACTIVE(HttpStatus.FORBIDDEN, "ERR_403_CLIENT_INACTIVE", "Client account is inactive or has been revoked."),
 
     // --- Server Errors (5xx) ---
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "ERR_500", "Internal server error"),

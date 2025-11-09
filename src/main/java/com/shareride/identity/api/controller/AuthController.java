@@ -23,11 +23,9 @@ import static org.springframework.http.HttpStatus.*;
 public class AuthController {
 
     private final AuthService authService;
-    private final RateLimiterService rateLimiterService;
 
     public AuthController(AuthService authService, RateLimiterService rateLimiterService) {
         this.authService = authService;
-        this.rateLimiterService = rateLimiterService;
     }
 
     @PostMapping(REGISTER)

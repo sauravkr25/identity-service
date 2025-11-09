@@ -10,6 +10,13 @@ public class Constants {
     public static final String FIELDS = "fields";
     public static final String ROLES = "roles";
     public static  final String EMAIL = "email";
+    public static  final String TYPE = "type";
+    public static  final String USER = "USER";
+    public static  final String SERVICE = "SERVICE";
+    public static  final String CLIENT_ID = "client_id";
+    public static  final String GRANT_TYPE = "grant_type";
+    public static  final String CLIENT_SECRET = "client_secret";
+    public static  final String CLIENT_CREDENTIALS_GRANT_TYPE = "client_credentials";
     public static final String TOKEN = "token";
     public static final String POST = "POST";
     public static final String GET = "GET";
@@ -42,6 +49,8 @@ public class Constants {
     public static final class Routes {
         public static final String API_V1 = "/api/v1";
         public static final String AUTH = "/auth";
+        public static final String OAUTH = "/oauth";
+        public static final String TOKEN = "/token";
         public static final String USERS = "/users";
         public static final String REGISTER = "/register";
         public static final String LOGIN = "/login";
@@ -52,6 +61,7 @@ public class Constants {
 
     public static final class Security {
         public static final String API_V1_AUTH_REGEX = API_V1 + "/auth/**";
+        public static final String API_V1_OAUTH_REGEX = API_V1 + "/oauth/**";
         public static final String API_V1_USERS_REGEX = API_V1 + "/users/**";
         public static final String API_V1_ADMIN_REGEX = API_V1 + "/admin/**";
         public static final String ACTUATOR_REGEX = "/actuator/**";

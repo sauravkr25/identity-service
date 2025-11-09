@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static com.shareride.identity.utils.Constants.Security.ACTUATOR_REGEX;
 import static com.shareride.identity.utils.Constants.Security.API_V1_AUTH_REGEX;
+import static com.shareride.identity.utils.Constants.Security.API_V1_OAUTH_REGEX;
 
 @Configuration
 @EnableWebSecurity
@@ -56,7 +57,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers(API_V1_AUTH_REGEX, ACTUATOR_REGEX).permitAll()
+                    .requestMatchers(API_V1_AUTH_REGEX, API_V1_OAUTH_REGEX, ACTUATOR_REGEX).permitAll()
                     .anyRequest().authenticated()
             )
             .exceptionHandling(ex -> ex

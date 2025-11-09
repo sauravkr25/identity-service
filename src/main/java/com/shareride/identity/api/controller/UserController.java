@@ -2,8 +2,11 @@ package com.shareride.identity.api.controller;
 
 import com.shareride.identity.api.response.UserResponse;
 import com.shareride.identity.domain.UserDomain;
+import com.shareride.identity.exception.ApplicationException;
+import com.shareride.identity.exception.ErrorCodes;
 import com.shareride.identity.service.UserService;
 import com.shareride.identity.utils.Constants;
+import com.shareride.identity.utils.PrincipalUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,12 +39,15 @@ public class UserController {
         // Spring injects the 'Authentication' object from the security context.
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String userId = userDetails.getUsername();
+        String principalName = userDetails.getUsername();
+        if (!PrincipalUtil.isUserPrincipal(principalName)) {
+            throw ApplicationException.of(ErrorCodes.FORBIDDEN);
+        }
+        UUID userId = PrincipalUtil.extractUserId(principalName);
 
         UserDomain userDomain = UserDomain.builder()
-                .userId(UUID.fromString(userId))
+                .userId(userId)
                 .build();
-
         userDomain = userService.getMyProfile(userDomain);
 
         return ResponseEntity.ok(UserResponse.from(userDomain));
